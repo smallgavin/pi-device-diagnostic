@@ -1,0 +1,16 @@
+{
+  "id": "healthy",
+  "prompt": "这台设备现在是否健康？有没有明显异常？",
+  "expectedDiagnosis": "healthy",
+  "device": { "deviceId": "jetson-mock-05", "model": "Jetson Orin NX 16GB (simulated)", "l4tVersion": "36.4", "firmwareVersion": "1.8.2", "powerMode": "15W", "services": [{ "name": "inference-service", "state": "active" }] },
+  "metrics": { "windowMinutes": 15, "samples": [
+    { "ageMinutes": 15, "inferenceP95Ms": 52, "gpuUtilizationPct": 51, "gpuTemperatureC": 61, "gpuClockMhz": 918, "memoryUsedMb": 6200, "memoryTotalMb": 16384, "swapUsedMb": 30, "diskUsedPct": 46, "diskFreeGb": 60, "cpuUtilizationPct": 37, "powerW": 11.5 },
+    { "ageMinutes": 7, "inferenceP95Ms": 53, "gpuUtilizationPct": 53, "gpuTemperatureC": 62, "gpuClockMhz": 918, "memoryUsedMb": 6250, "memoryTotalMb": 16384, "swapUsedMb": 30, "diskUsedPct": 46, "diskFreeGb": 60, "cpuUtilizationPct": 38, "powerW": 11.6 },
+    { "ageMinutes": 0, "inferenceP95Ms": 54, "gpuUtilizationPct": 52, "gpuTemperatureC": 62, "gpuClockMhz": 918, "memoryUsedMb": 6280, "memoryTotalMb": 16384, "swapUsedMb": 31, "diskUsedPct": 46, "diskFreeGb": 60, "cpuUtilizationPct": 38, "powerW": 11.6 }
+  ] },
+  "processes": [
+    { "pid": 1201, "name": "inference-service", "cpuPct": 51, "memoryMb": 4300, "memoryGrowthMb15m": 20, "gpuMemoryMb": 3400 }
+  ],
+  "logs": [],
+  "changes": []
+}

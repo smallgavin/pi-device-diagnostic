@@ -1,0 +1,21 @@
+{
+  "id": "regression",
+  "prompt": "升级后推理延迟变高了，检查是不是系统资源或版本回退问题。",
+  "expectedDiagnosis": "software_regression",
+  "device": { "deviceId": "jetson-mock-04", "model": "Jetson Orin NX 16GB (simulated)", "l4tVersion": "36.4", "firmwareVersion": "1.9.0", "powerMode": "15W", "services": [{ "name": "inference-service", "state": "active" }] },
+  "metrics": { "windowMinutes": 15, "samples": [
+    { "ageMinutes": 15, "inferenceP95Ms": 112, "gpuUtilizationPct": 58, "gpuTemperatureC": 64, "gpuClockMhz": 918, "memoryUsedMb": 6700, "memoryTotalMb": 16384, "swapUsedMb": 35, "diskUsedPct": 49, "diskFreeGb": 57, "cpuUtilizationPct": 38, "powerW": 11.8 },
+    { "ageMinutes": 7, "inferenceP95Ms": 117, "gpuUtilizationPct": 60, "gpuTemperatureC": 64, "gpuClockMhz": 918, "memoryUsedMb": 6740, "memoryTotalMb": 16384, "swapUsedMb": 35, "diskUsedPct": 49, "diskFreeGb": 57, "cpuUtilizationPct": 39, "powerW": 11.9 },
+    { "ageMinutes": 0, "inferenceP95Ms": 119, "gpuUtilizationPct": 59, "gpuTemperatureC": 65, "gpuClockMhz": 918, "memoryUsedMb": 6760, "memoryTotalMb": 16384, "swapUsedMb": 36, "diskUsedPct": 49, "diskFreeGb": 57, "cpuUtilizationPct": 40, "powerW": 12.0 }
+  ] },
+  "processes": [
+    { "pid": 1201, "name": "inference-service", "cpuPct": 55, "memoryMb": 4500, "memoryGrowthMb15m": 15, "gpuMemoryMb": 3500 }
+  ],
+  "logs": [
+    { "id": "R1", "ageMinutes": 12, "category": "inference", "severity": "warn", "message": "latency p95 119 ms after inference runtime deployment; previous baseline 52 ms" }
+  ],
+  "changes": [
+    { "id": "C1", "ageHours": 8, "component": "inference-runtime", "fromVersion": "2.4.1", "toVersion": "2.5.0", "note": "new runtime backend enabled; benchmark before update p95 52 ms, after p95 119 ms" },
+    { "id": "C2", "ageHours": 8, "component": "firmware", "fromVersion": "1.8.2", "toVersion": "1.9.0", "note": "updated in same maintenance window; cause cannot be isolated from timeline alone" }
+  ]
+}

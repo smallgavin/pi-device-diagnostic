@@ -1,0 +1,10 @@
+references/
+node_modules/
+dist/
+.npm-cache/
+.env
+.env.*
+*.log
+task_plan.md
+findings.md
+progress.md

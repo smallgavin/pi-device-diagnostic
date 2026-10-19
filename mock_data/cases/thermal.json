@@ -1,0 +1,20 @@
+{
+  "id": "thermal",
+  "prompt": "这台 Jetson 最近推理速度突然下降，帮我分析原因。",
+  "expectedDiagnosis": "thermal_throttling",
+  "device": { "deviceId": "jetson-mock-01", "model": "Jetson Orin NX 16GB (simulated)", "l4tVersion": "36.4", "firmwareVersion": "1.8.2", "powerMode": "15W", "services": [{ "name": "inference-service", "state": "active" }] },
+  "metrics": { "windowMinutes": 15, "samples": [
+    { "ageMinutes": 15, "inferenceP95Ms": 52, "gpuUtilizationPct": 84, "gpuTemperatureC": 86, "gpuClockMhz": 918, "memoryUsedMb": 7200, "memoryTotalMb": 16384, "swapUsedMb": 60, "diskUsedPct": 48, "diskFreeGb": 58, "cpuUtilizationPct": 40, "powerW": 14.1 },
+    { "ageMinutes": 7, "inferenceP95Ms": 111, "gpuUtilizationPct": 91, "gpuTemperatureC": 91, "gpuClockMhz": 714, "memoryUsedMb": 7280, "memoryTotalMb": 16384, "swapUsedMb": 62, "diskUsedPct": 48, "diskFreeGb": 58, "cpuUtilizationPct": 43, "powerW": 14.2 },
+    { "ageMinutes": 0, "inferenceP95Ms": 146, "gpuUtilizationPct": 94, "gpuTemperatureC": 94, "gpuClockMhz": 510, "memoryUsedMb": 7350, "memoryTotalMb": 16384, "swapUsedMb": 64, "diskUsedPct": 49, "diskFreeGb": 57, "cpuUtilizationPct": 45, "powerW": 13.5 }
+  ] },
+  "processes": [
+    { "pid": 1201, "name": "inference-service", "cpuPct": 72, "memoryMb": 4900, "memoryGrowthMb15m": 60, "gpuMemoryMb": 4100 },
+    { "pid": 456, "name": "camera-pipeline", "cpuPct": 14, "memoryMb": 620, "memoryGrowthMb15m": 5, "gpuMemoryMb": 350 }
+  ],
+  "logs": [
+    { "id": "T1", "ageMinutes": 3, "category": "thermal", "severity": "warn", "message": "GPU thermal throttling active; temperature 93C, clock limited to 510 MHz" },
+    { "id": "T2", "ageMinutes": 1, "category": "inference", "severity": "warn", "message": "p95 inference latency rose above 140 ms" }
+  ],
+  "changes": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "disk",
+  "prompt": "推理服务最近很卡，帮我定位是哪里出了问题。",
+  "expectedDiagnosis": "disk_full",
+  "device": { "deviceId": "jetson-mock-03", "model": "Jetson Orin NX 16GB (simulated)", "l4tVersion": "36.4", "firmwareVersion": "1.8.2", "powerMode": "15W", "services": [{ "name": "inference-service", "state": "active" }] },
+  "metrics": { "windowMinutes": 15, "samples": [
+    { "ageMinutes": 15, "inferenceP95Ms": 51, "gpuUtilizationPct": 59, "gpuTemperatureC": 65, "gpuClockMhz": 918, "memoryUsedMb": 6500, "memoryTotalMb": 16384, "swapUsedMb": 40, "diskUsedPct": 94, "diskFreeGb": 6.0, "cpuUtilizationPct": 39, "powerW": 11.9 },
+    { "ageMinutes": 7, "inferenceP95Ms": 83, "gpuUtilizationPct": 57, "gpuTemperatureC": 66, "gpuClockMhz": 918, "memoryUsedMb": 6550, "memoryTotalMb": 16384, "swapUsedMb": 42, "diskUsedPct": 97, "diskFreeGb": 3.0, "cpuUtilizationPct": 44, "powerW": 12.0 },
+    { "ageMinutes": 0, "inferenceP95Ms": 154, "gpuUtilizationPct": 55, "gpuTemperatureC": 66, "gpuClockMhz": 918, "memoryUsedMb": 6600, "memoryTotalMb": 16384, "swapUsedMb": 42, "diskUsedPct": 99, "diskFreeGb": 0.8, "cpuUtilizationPct": 48, "powerW": 12.0 }
+  ] },
+  "processes": [
+    { "pid": 3101, "name": "log-writer", "cpuPct": 19, "memoryMb": 360, "memoryGrowthMb15m": 8, "gpuMemoryMb": 0 },
+    { "pid": 1201, "name": "inference-service", "cpuPct": 54, "memoryMb": 4400, "memoryGrowthMb15m": 20, "gpuMemoryMb": 3500 }
+  ],
+  "logs": [
+    { "id": "D1", "ageMinutes": 1, "category": "storage", "severity": "error", "message": "write failed: No space left on device; /var/log/inference/debug.log grew to 22 GB" },
+    { "id": "D2", "ageMinutes": 2, "category": "inference", "severity": "warn", "message": "result persist retry delayed inference response" }
+  ],
+  "changes": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "memory",
+  "prompt": "设备推理变慢，还偶尔退出，看看是不是资源问题。",
+  "expectedDiagnosis": "memory_pressure",
+  "device": { "deviceId": "jetson-mock-02", "model": "Jetson Orin NX 16GB (simulated)", "l4tVersion": "36.4", "firmwareVersion": "1.8.2", "powerMode": "15W", "services": [{ "name": "inference-service", "state": "active" }] },
+  "metrics": { "windowMinutes": 15, "samples": [
+    { "ageMinutes": 15, "inferenceP95Ms": 56, "gpuUtilizationPct": 61, "gpuTemperatureC": 67, "gpuClockMhz": 918, "memoryUsedMb": 13200, "memoryTotalMb": 16384, "swapUsedMb": 800, "diskUsedPct": 51, "diskFreeGb": 54, "cpuUtilizationPct": 44, "powerW": 12.3 },
+    { "ageMinutes": 7, "inferenceP95Ms": 97, "gpuUtilizationPct": 58, "gpuTemperatureC": 68, "gpuClockMhz": 918, "memoryUsedMb": 15000, "memoryTotalMb": 16384, "swapUsedMb": 1700, "diskUsedPct": 51, "diskFreeGb": 54, "cpuUtilizationPct": 49, "powerW": 12.6 },
+    { "ageMinutes": 0, "inferenceP95Ms": 172, "gpuUtilizationPct": 46, "gpuTemperatureC": 68, "gpuClockMhz": 918, "memoryUsedMb": 16030, "memoryTotalMb": 16384, "swapUsedMb": 2900, "diskUsedPct": 51, "diskFreeGb": 54, "cpuUtilizationPct": 56, "powerW": 12.7 }
+  ] },
+  "processes": [
+    { "pid": 2222, "name": "inference-service", "cpuPct": 66, "memoryMb": 11100, "memoryGrowthMb15m": 3200, "gpuMemoryMb": 5200 },
+    { "pid": 733, "name": "camera-pipeline", "cpuPct": 9, "memoryMb": 540, "memoryGrowthMb15m": 8, "gpuMemoryMb": 120 }
+  ],
+  "logs": [
+    { "id": "M1", "ageMinutes": 2, "category": "memory", "severity": "error", "message": "kernel OOM killer terminated inference-worker pid 2290 while inference-service pid 2222 continued growing" },
+    { "id": "M2", "ageMinutes": 4, "category": "memory", "severity": "warn", "message": "memory pressure and swap activity increasing" }
+  ],
+  "changes": []
+}
