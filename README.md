@@ -1,6 +1,18 @@
 # Pi Edge Device Diagnostic Agent PoC
 
-A small, mock-first experiment with the [Pi agent harness](https://github.com/earendil-works/pi). It investigates simulated edge-device problems through read-only tools and returns an evidence-backed diagnosis. This is a personal technical feasibility PoC, not a production service. I do not currently have a real NVIDIA Jetson; **telemetry, processes, logs, and changes are all mock data**, and no real hardware validation is claimed.
+A small, mock-first experiment built with [Pi Agent Core and Pi AI](https://github.com/earendil-works/pi) on a TypeScript/Node.js backend. It investigates simulated edge-device problems through read-only tools and returns an evidence-backed diagnosis. This is a personal technical feasibility PoC, not a production service. I do not currently have a real NVIDIA Jetson; **telemetry, processes, logs, and changes are all mock data**, and no real hardware validation is claimed.
+
+## Tech stack at a glance
+
+| Role | Technology | Used for |
+| --- | --- | --- |
+| Agent harness | **Pi Agent Core** (`@earendil-works/pi-agent-core`) | Agent loop, tool calls, in-memory sessions, events, and safety hooks |
+| Model integration | **Pi AI** (`@earendil-works/pi-ai`) | DeepSeek/OpenAI live providers and a scripted offline provider |
+| Backend | **TypeScript + Node.js** | Agent, tools, mock simulator, local HTTP API, CLI, and evaluation runner |
+| Data contracts | **TypeBox** | Tool and report schemas with runtime validation |
+| Browser demo | Plain JavaScript, HTML, and CSS | Local interface for trying the same backend agent |
+
+The agent receives a question, calls a read-only mock tool, observes its result, and chooses whether to investigate further or return a diagnosis. The live model makes those choices through Pi's agent loop; the offline demo follows a scripted observation consumer. See [`src/agent.ts`](src/agent.ts) for the Pi session and [`src/tools.ts`](src/tools.ts) for the tool boundary.
 
 ## Why this project
 
