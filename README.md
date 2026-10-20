@@ -1,6 +1,35 @@
 # Pi Edge Device Diagnostic Agent PoC
 
-A small, mock-first experiment built with [Pi Agent Core and Pi AI](https://github.com/earendil-works/pi) on a TypeScript/Node.js backend. It investigates simulated edge-device problems through read-only tools and returns an evidence-backed diagnosis. This is a personal technical feasibility PoC, not a production service. I do not currently have a real NVIDIA Jetson; **telemetry, processes, logs, and changes are all mock data**, and no real hardware validation is claimed.
+**Pi Agent Core + TypeScript/Node.js · 6 read-only tools · 5 mock diagnostic cases.** Ask about a simulated edge device, watch the agent inspect observations, and get an evidence-backed diagnosis. This is a personal technical feasibility PoC built with [Pi Agent Core and Pi AI](https://github.com/earendil-works/pi).
+
+> **Scope:** I do not currently have a real NVIDIA Jetson. Telemetry, processes, logs, and changes are mock data; this project has not been validated on real hardware.
+
+## Web UI preview
+
+These screenshots were captured from the running local web app with the `thermal` mock case. They show the **scripted offline mode**: Pi executes the tools and returns observations, while the next tool choice is scripted. They do not represent a live Jetson or an LLM reasoning benchmark.
+
+![Local diagnostic UI with five mock cases and simulated device telemetry](assets/screenshots/overview.png)
+
+The dashboard lets you choose a case, inspect its simulated telemetry, and ask a diagnostic question.
+
+![Thermal case showing the diagnosis, evidence, and recommended checks](assets/screenshots/thermal-diagnosis.png)
+
+After running the thermal case, the result panel reports high-temperature throttling with evidence and human-operated recommendations.
+
+![Read-only Pi tool calls and observation summaries for the thermal case](assets/screenshots/tool-trace.png)
+
+The trace lists the four read-only tools called in this offline run. It shows tool observations, not private model reasoning.
+
+## Try it locally
+
+With Node.js **>=22.19**, you can explore the five mock cases without an API key:
+
+```bash
+npm ci --ignore-scripts
+npm run web
+```
+
+Open `http://127.0.0.1:4173`, select a case, and click **运行诊断**. The default **离线演示** mode is scripted; [live model setup](#how-to-run) is optional and still uses mock device data.
 
 ## Tech stack at a glance
 
